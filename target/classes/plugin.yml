@@ -1,0 +1,23 @@
+name: SateCustomItems
+version: '1.0.1'
+main: org.satellite.dev.progiple.satecustomitems.SateCustomItems
+api-version: '1.16'
+authors: [ProGiple]
+depend:
+  - LunaSpring
+commands:
+  satecustomitems:
+    aliases:
+      - sci
+      - customitems
+      - citems
+      - items
+      - sateitems
+      - sitems
+permissions:
+  satecustomitems.reload:
+    default: op
+  satecustomitems.give:
+    default: op
+  satecustomitems.observer.hide:
+    default: false

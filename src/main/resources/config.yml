@@ -1,0 +1,41 @@
+items:
+  exp_generator:
+    material: PLAYER_HEAD
+    displayName: ""
+    lore: []
+    gived_exp_per_item: 4
+  money_generator:
+    material: PLAYER_HEAD
+    displayName: ""
+    lore: [ ]
+    gived_money_per_item: 1
+  observer:
+    material: COMPASS
+    displayName: ""
+    lore: [ ]
+    radius: 150
+    hide_invisibilities: true
+    cooldown: 30
+  impulse:
+    material: SNOWBALL
+    displayName: ""
+    lore: [ ]
+    power: 1.0
+  obvious_crystal:
+    material: AMETHYST
+    displayName: ""
+    lore: [ ]
+    time: 20
+    radius: 15
+  blinding_wave:
+    material: BLAZE_POWDER
+    displayName: ""
+    lore: [ ]
+    radius: 15
+    time: 8
+    level: 1
+messages:
+  reload: ""
+  noPlayersNear: ""
+  observerScan: ""
+  moneyGen: "+[money]"
