@@ -11,6 +11,8 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.IgnoredField;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
 
+import java.util.stream.Stream;
+
 @RealizedComponent @Getter
 public class ExpGeneratorComponent extends AbsItemComponent implements TimedItemComponent {
     @IgnoredField
@@ -21,7 +23,8 @@ public class ExpGeneratorComponent extends AbsItemComponent implements TimedItem
     }
 
     @Override
-    public void tick(Player handler, int amount) {
+    public void tick(Player handler, Stream<ItemStack> stream) {
+        int amount = stream.mapToInt(ItemStack::getAmount).sum();
         Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount * this.gived_exp_per_item));
     }
 }

@@ -12,6 +12,8 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.IgnoredField;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
 
+import java.util.stream.Stream;
+
 @RealizedComponent @Getter
 public class MoneyGeneratorComponent extends AbsItemComponent implements TimedItemComponent {
     @IgnoredField
@@ -22,7 +24,8 @@ public class MoneyGeneratorComponent extends AbsItemComponent implements TimedIt
     }
 
     @Override
-    public void tick(Player handler, int amount) {
+    public void tick(Player handler, Stream<ItemStack> stream) {
+        int amount = stream.mapToInt(ItemStack::getAmount).sum();
         double money = LunaMath.round(amount * this.gived_money_per_item, 1);
         VaultManager.deposit(handler, money);
         Config.sendMessage(handler, "moneyGen", "money-%-" + money);

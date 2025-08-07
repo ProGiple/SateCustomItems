@@ -15,6 +15,7 @@ items:
     lore: [ ]
     radius: 150
     hide_invisibilities: true
+    cooldown: 30
   impulse:
     material: SNOWBALL
     displayName: ""

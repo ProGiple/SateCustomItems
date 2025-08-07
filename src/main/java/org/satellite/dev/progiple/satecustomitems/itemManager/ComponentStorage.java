@@ -43,7 +43,8 @@ public class ComponentStorage {
         NotRealized.loadComponents();
         realizedComponents.clear();
 
-        Set<ClassEntry<RealizedComponent>> entries = AnnotationScanner.findAnnotatedClasses(SateCustomItems.getINSTANCE(), RealizedComponent.class);
+        Set<ClassEntry<RealizedComponent>> entries = AnnotationScanner.findAnnotatedClasses(SateCustomItems.getINSTANCE(), RealizedComponent.class,
+                "org.satellite.dev.progiple.satecustomitems.itemManager");
         for (ClassEntry<RealizedComponent> entry : entries) {
             if (NotRealized.components.stream().noneMatch(c -> c.isAssignableFrom(entry.getClazz()))) continue;
 
@@ -60,7 +61,8 @@ public class ComponentStorage {
         public void loadComponents() {
             components.clear();
 
-            Set<ClassEntry<Component>> entries = AnnotationScanner.findAnnotatedClasses(SateCustomItems.getINSTANCE(), Component.class);
+            Set<ClassEntry<Component>> entries = AnnotationScanner.findAnnotatedClasses(SateCustomItems.getINSTANCE(), Component.class,
+                    "org.satellite.dev.progiple.satecustomitems.itemManager");
             for (ClassEntry<Component> entry : entries) {
                 components.add(entry.getClazz());
             }
