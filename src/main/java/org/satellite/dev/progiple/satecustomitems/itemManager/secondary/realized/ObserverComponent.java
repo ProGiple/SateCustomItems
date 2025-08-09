@@ -26,6 +26,8 @@ public class ObserverComponent extends AbsItemComponent implements ClickableItem
 
     @Override
     public boolean onClick(PlayerInteractEvent event) {
+        if (!event.getAction().name().contains("RIGHT")) return false;
+
         Player player = event.getPlayer();
         if (player.hasCooldown(Material.COMPASS)) return false;
 

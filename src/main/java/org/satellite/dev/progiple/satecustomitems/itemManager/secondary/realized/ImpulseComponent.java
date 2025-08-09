@@ -21,6 +21,7 @@ public class ImpulseComponent extends AbsItemComponent implements ClickableItemC
 
     @Override
     public boolean onClick(PlayerInteractEvent event) {
+        if (!event.getAction().name().contains("RIGHT")) return false;
         Player player = event.getPlayer();
 
         player.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 10, 0.5, 0.5, 0.5, 0.5);

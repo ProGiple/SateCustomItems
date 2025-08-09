@@ -24,6 +24,7 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
 
     @Override
     public boolean onClick(PlayerInteractEvent event) {
+        if (!event.getAction().name().contains("RIGHT")) return false;
         Player player = event.getPlayer();
 
         Stream<InvisibilityPlayer> nearby = player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)

@@ -20,6 +20,7 @@ public class BlindingWaveComponent extends AbsItemComponent implements Clickable
 
     @Override
     public boolean onClick(PlayerInteractEvent event) {
+        if (!event.getAction().name().contains("RIGHT")) return false;
         Player player = event.getPlayer();
 
         PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, this.time * 20, this.level - 1);

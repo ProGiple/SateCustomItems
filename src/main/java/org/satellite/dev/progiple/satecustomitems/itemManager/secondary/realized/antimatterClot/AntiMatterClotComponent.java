@@ -19,6 +19,7 @@ public class AntiMatterClotComponent extends AbsItemComponent implements Clickab
 
     @Override
     public boolean onClick(PlayerInteractEvent e) {
+        if (!e.getAction().name().contains("RIGHT")) return false;
         Player player = e.getPlayer();
 
         player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)
