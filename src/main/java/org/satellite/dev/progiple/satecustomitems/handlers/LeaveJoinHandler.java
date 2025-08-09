@@ -16,6 +16,7 @@ import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
+import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized.antimatterClot.LockedManager;
 import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 import org.satellite.dev.progiple.satecustomitems.tasks.TickableTask;
 
@@ -34,6 +35,8 @@ public class LeaveJoinHandler implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         Player player = e.getPlayer();
+
+        LockedManager.remove(player.getUniqueId());
         TaskManager.get(player).ifPresent(TickableTask::stop);
     }
 }

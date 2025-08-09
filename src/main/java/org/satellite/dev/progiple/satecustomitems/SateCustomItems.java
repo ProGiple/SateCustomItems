@@ -8,6 +8,7 @@ import org.satellite.dev.progiple.satecustomitems.handlers.BlockPlaceHandler;
 import org.satellite.dev.progiple.satecustomitems.handlers.InteractHandler;
 import org.satellite.dev.progiple.satecustomitems.handlers.LeaveJoinHandler;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
+import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized.antimatterClot.LockedManager;
 import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 
 public final class SateCustomItems extends LunaPlugin {
@@ -19,7 +20,11 @@ public final class SateCustomItems extends LunaPlugin {
         super.onEnable();
 
         Bukkit.getScheduler().runTask(INSTANCE, ComponentStorage::loadComponents);
-        this.registerListeners(new InteractHandler(), new LeaveJoinHandler(), new BlockPlaceHandler());
+        this.registerListeners(
+                new InteractHandler(),
+                new LeaveJoinHandler(),
+                new BlockPlaceHandler(),
+                new LockedManager.Handler());
 
         LunaExecutor.initialize(INSTANCE);
     }

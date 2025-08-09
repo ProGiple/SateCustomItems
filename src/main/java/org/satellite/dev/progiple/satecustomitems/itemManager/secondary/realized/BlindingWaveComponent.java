@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
@@ -26,10 +27,13 @@ public class BlindingWaveComponent extends AbsItemComponent implements Clickable
         player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)
                 .forEach(p -> {
                     if (!p.equals(player)) {
+                        Config.sendMessage(player, "blindingWaveUseFrom", "player-%-" + player.getName());
                         p.addPotionEffect(blindness);
                         p.addPotionEffect(slowness);
                     }
                 });
+
+        Config.sendMessage(player, "blindingWaveUse");
         return true;
     }
 }

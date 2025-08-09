@@ -50,7 +50,7 @@ public class ObserverComponent extends AbsItemComponent implements ClickableItem
         itemStack.setItemMeta(compassMeta);
 
         player.setCooldown(Material.COMPASS, this.cooldown * 20);
-        Config.sendMessage(player, "observerScan");
+        Config.sendMessage(player, "observerScan", "player-%-" + nearbyPlayer.getName());
         return false;
     }
 

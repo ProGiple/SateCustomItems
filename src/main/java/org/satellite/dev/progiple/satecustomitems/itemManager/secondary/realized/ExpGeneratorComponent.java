@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
+import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.IgnoredField;
@@ -24,7 +25,8 @@ public class ExpGeneratorComponent extends AbsItemComponent implements TimedItem
 
     @Override
     public void tick(Player handler, Stream<ItemStack> stream) {
-        int amount = stream.mapToInt(ItemStack::getAmount).sum();
-        Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount * this.gived_exp_per_item));
+        int amount = stream.mapToInt(ItemStack::getAmount).sum() * this.gived_exp_per_item;
+        Config.sendMessage(handler, "experienceGen", "exp-%-" + amount);
+        Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount));
     }
 }

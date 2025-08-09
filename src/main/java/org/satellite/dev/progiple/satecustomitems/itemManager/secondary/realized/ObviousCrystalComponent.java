@@ -6,6 +6,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
+import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
@@ -33,6 +34,8 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
                     invisibilityPlayer.recognize();
                     return invisibilityPlayer;
                 });
+
+        Config.sendMessage(player, "obviousCrystalUse");
         Bukkit.getScheduler().runTaskLater(SateCustomItems.getINSTANCE(), () -> nearby.forEach(InvisibilityPlayer::back), 20L * this.time);
         return true;
     }
