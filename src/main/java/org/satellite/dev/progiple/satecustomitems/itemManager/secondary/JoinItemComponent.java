@@ -8,6 +8,6 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.SlotFilteringCompo
 import java.util.stream.Stream;
 
 @Component
-public interface TimedItemComponent extends SlotFilteringComponent {
-    void tick(Player handler, Stream<ItemStack> componentItems);
+public interface JoinItemComponent extends SlotFilteringComponent {
+    void onJoin(Player handler, Stream<ItemStack> componentItems);
 }

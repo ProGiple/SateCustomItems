@@ -22,11 +22,10 @@ public class InteractHandler implements Listener {
         ItemStack hand = player.getInventory().getItemInMainHand();
         if (hand.getType().isAir() || player.isSneaking()) return;
 
-        ItemComponent component = ComponentStorage.getComponent(hand);
-        if (!(component instanceof ClickableItemComponent clickableItemComponent)
-            || this.cashes.isCancelled(e, player.getUniqueId())) return;
+        ClickableItemComponent component = ComponentStorage.getComponent(hand, ClickableItemComponent.class);
+        if (component == null || this.cashes.isCancelled(e, player.getUniqueId())) return;
 
         e.setCancelled(true);
-        if (clickableItemComponent.onClick(e)) hand.setAmount(hand.getAmount() - 1);
+        if (component.onClick(e)) hand.setAmount(hand.getAmount() - 1);
     }
 }
