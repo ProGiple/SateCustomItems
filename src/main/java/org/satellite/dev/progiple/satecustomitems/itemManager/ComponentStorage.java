@@ -70,10 +70,10 @@ public class ComponentStorage {
         Stream<ItemStack> stream;
         if (itemComponent instanceof SlotFilteringComponent sfc) {
             stream = sfc.getEnabledSlots() == null || sfc.getEnabledSlots().length == 0 ?
-                    Arrays.stream(inventory.getStorageContents()) :
+                    Arrays.stream(inventory.getContents()) :
                     Arrays.stream(sfc.getEnabledSlots()).filter(Objects::nonNull).map(inventory::getItem);
         } else {
-            stream = Arrays.stream(inventory.getStorageContents());
+            stream = Arrays.stream(inventory.getContents());
         }
 
         return stream.filter(i -> i != null && !i.getType().isAir() && itemComponent.itemIsComponent(i));
