@@ -20,7 +20,8 @@ items:
     material: SNOWBALL
     displayName: ""
     lore: [ ]
-    power: 1.0
+    verticalPower: 1.0
+    horizontalPower: 1.0
   obvious_crystal:
     material: AMETHYST
     displayName: ""
@@ -34,8 +35,23 @@ items:
     radius: 15
     time: 8
     level: 1
+  antimatter_clot:
+    material: MAGMA_CREAM
+    displayName: ""
+    lore: [ ]
+    radius: 15
+    time: 30
 messages:
   reload: ""
   noPlayersNear: ""
   observerScan: ""
   moneyGen: "+[money]"
+  experienceGen: "+[exp]"
+  obviousCrystalUse: ""
+  impulseUse: ""
+  blindingWaveUse: ""
+  blindingWaveUseFrom: "[player]"
+  antimatterClotUse: ""
+  antimatterClotUseFrom: "[player]"
+  pearlsIsDisabled: ""
+  fireworksIsDisabled: ""

@@ -1,5 +1,5 @@
 name: SateCustomItems
-version: '1.0.2'
+version: '1.0.6'
 main: org.satellite.dev.progiple.satecustomitems.SateCustomItems
 api-version: '1.16'
 authors: [ProGiple]
