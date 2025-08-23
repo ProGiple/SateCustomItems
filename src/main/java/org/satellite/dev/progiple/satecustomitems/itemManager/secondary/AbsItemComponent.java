@@ -2,22 +2,49 @@ package org.satellite.dev.progiple.satecustomitems.itemManager.secondary;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.novasparkle.lunaspring.API.events.CooldownPrevent;
 import org.novasparkle.lunaspring.API.menus.items.NonMenuItem;
 import org.novasparkle.lunaspring.API.util.service.managers.NBTManager;
+import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
 
 import java.lang.reflect.Field;
+import java.util.UUID;
 
 @Getter
 public abstract class AbsItemComponent implements ItemComponent {
+    public static final UUID HEAD_UUID = UUID.fromString("b7bfad8d-6790-453a-bf3c-e1d78eca0ee5");
+    private static final String PERM_TEMPLATE = "satecustomitems.bypass.cooldown.";
+
     @IgnoredField private final String id;
     @IgnoredField public ConfigurationSection itemSection;
+    public int cooldown;
     public AbsItemComponent(String id) {
         this.id = id;
         this.reloadSection();
+    }
+
+    public boolean inCooldown(Player player, Material material) {
+        if (player.hasPermission(PERM_TEMPLATE + this.id) || player.hasPermission(PERM_TEMPLATE + "*")) return false;
+
+        if (this.cooldown > 0 && player.hasCooldown(material)) {
+            double seconds = LunaMath.round((double) player.getCooldown(material) / 20, 1);
+            Config.sendMessage(player, "inCooldown", "seconds-%-" + seconds);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void putCooldown(Player player, Material material) {
+        if (this.cooldown > 0
+                && !player.hasPermission(PERM_TEMPLATE + this.id)
+                && !player.hasPermission(PERM_TEMPLATE + "*")) player.setCooldown(material, this.cooldown);
     }
 
     @SneakyThrows
@@ -47,7 +74,11 @@ public abstract class AbsItemComponent implements ItemComponent {
     @Override
     public NonMenuItem createItem() {
         NonMenuItem item = new NonMenuItem(this.itemSection);
-        NBTManager.setBool(item.getItemStack(), "sci_" + this.id, true);
+
+        ItemStack stack = item.getItemStack();
+        if (item.getHeadValue() != null) NBTManager.base64head(stack, item.getHeadValue(), HEAD_UUID);
+
+        NBTManager.setBool(stack, "sci_" + this.id, true);
         return item;
     }
 }

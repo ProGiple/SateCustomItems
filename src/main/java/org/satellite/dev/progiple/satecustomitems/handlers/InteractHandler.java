@@ -8,24 +8,22 @@ import org.bukkit.inventory.ItemStack;
 import org.novasparkle.lunaspring.API.events.CooldownPrevent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
 
 import java.util.UUID;
 
 public class InteractHandler implements Listener {
-    private final CooldownPrevent<UUID> cashes = new CooldownPrevent<>(150);
+    private final CooldownPrevent<UUID> cashes = new CooldownPrevent<>(100);
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
 
         ItemStack hand = player.getInventory().getItemInMainHand();
-        if (hand.getType().isAir() || player.isSneaking()) return;
+        if (hand.getType().isAir()) return;
 
         ClickableItemComponent component = ComponentStorage.getComponent(hand, ClickableItemComponent.class);
         if (component == null || this.cashes.isCancelled(e, player.getUniqueId())) return;
 
-        e.setCancelled(true);
-        if (component.onClick(e)) hand.setAmount(hand.getAmount() - 1);
+        if (component.onClick(e, hand)) e.setCancelled(true);
     }
 }

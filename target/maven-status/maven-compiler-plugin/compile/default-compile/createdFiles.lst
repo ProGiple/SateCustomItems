@@ -24,6 +24,7 @@ org\satellite\dev\progiple\satecustomitems\itemManager\secondary\realized\antima
 org\satellite\dev\progiple\satecustomitems\itemManager\ComponentStorage.class
 org\satellite\dev\progiple\satecustomitems\handlers\BlockPlaceHandler.class
 org\satellite\dev\progiple\satecustomitems\itemManager\RealizedComponent.class
+org\satellite\dev\progiple\satecustomitems\itemManager\secondary\BlockPlaceItemComponent.class
 org\satellite\dev\progiple\satecustomitems\itemManager\secondary\realized\ImpulseComponent.class
 org\satellite\dev\progiple\satecustomitems\tasks\TickableTask.class
 org\satellite\dev\progiple\satecustomitems\itemManager\ComponentStorage$NotRealized.class

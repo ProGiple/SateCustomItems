@@ -1,5 +1,5 @@
 name: SateCustomItems
-version: '1.0.6'
+version: '1.0.7'
 main: org.satellite.dev.progiple.satecustomitems.SateCustomItems
 api-version: '1.16'
 authors: [ProGiple]
@@ -20,4 +20,8 @@ permissions:
   satecustomitems.give:
     default: op
   satecustomitems.observer.hide:
+    default: false
+  satecustomitems.bypass.cooldown.*:
+    default: false
+  satecustomitems.bypass.cooldown.<id>:
     default: false

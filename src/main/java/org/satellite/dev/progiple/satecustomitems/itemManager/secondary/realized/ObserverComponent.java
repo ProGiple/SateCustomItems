@@ -3,6 +3,7 @@ package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realize
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
@@ -18,22 +19,20 @@ import java.util.Comparator;
 @RealizedComponent
 public class ObserverComponent extends AbsItemComponent implements ClickableItemComponent {
     private int radius;
-    private int cooldown;
     private boolean hide_invisibilities;
     public ObserverComponent() {
         super("observer");
     }
 
     @Override
-    public boolean onClick(PlayerInteractEvent event) {
-        if (!event.getAction().name().contains("RIGHT")) return false;
+    public boolean onClick(PlayerInteractEvent event, ItemStack itemStack) {
+        Action action = event.getAction();
+        if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) return false;
 
         Player player = event.getPlayer();
-        if (player.hasCooldown(Material.COMPASS)) return false;
+        if (this.inCooldown(player, Material.COMPASS)) return true;
 
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
         Location location = player.getLocation();
-
         Player nearbyPlayer = player.getWorld().getNearbyPlayers(location, this.radius).stream()
                 .filter(p -> !p.hasPermission("satecustomitems.observer.hide")
                         && (!this.hide_invisibilities || !p.hasPotionEffect(PotionEffectType.INVISIBILITY))
@@ -41,19 +40,20 @@ public class ObserverComponent extends AbsItemComponent implements ClickableItem
                         && player.canSee(p))
                 .min(Comparator.comparingDouble(p -> p.getLocation().distance(location)))
                 .orElse(null);
+
+        this.putCooldown(player, Material.COMPASS);
         if (nearbyPlayer == null) {
             Config.sendMessage(player, "noPlayersNear");
-            return false;
+            return true;
         }
 
-        CompassMeta compassMeta = (CompassMeta) itemStack;
+        CompassMeta compassMeta = (CompassMeta) itemStack.getItemMeta();
         compassMeta.setLodestone(nearbyPlayer.getLocation());
         compassMeta.setLodestoneTracked(false);
         itemStack.setItemMeta(compassMeta);
 
-        player.setCooldown(Material.COMPASS, this.cooldown * 20);
         Config.sendMessage(player, "observerScan", "player-%-" + nearbyPlayer.getName());
-        return false;
+        return true;
     }
 
     @Override

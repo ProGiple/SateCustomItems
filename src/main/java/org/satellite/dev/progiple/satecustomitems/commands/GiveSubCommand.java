@@ -26,9 +26,7 @@ public class GiveSubCommand implements LunaCompleter {
         return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) :
                 list.size() == 2 ? Utils.tabCompleterFiltering(ComponentStorage.getRealizedComponents()
                         .stream()
-                        .map(c -> c.getClass().getSimpleName()
-                                .replace(".class", "")
-                                .replace("Component", ""))
+                        .map(ItemComponent::getId)
                         .collect(Collectors.toSet()), list.get(1)) :
                         list.size() == 3 ? List.of("<количество>"): null;
     }

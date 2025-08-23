@@ -31,7 +31,7 @@ public class LeaveJoinHandler implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        new TickableTask(player).runTaskLaterAsynchronously(SateCustomItems.getINSTANCE(), 80L);
+        new TickableTask(player).runTaskLaterAsynchronously(SateCustomItems.getINSTANCE(), 30L);
 
         PlayerInventory playerInventory = player.getInventory();
         ComponentStorage.getRealizedComponents(JoinItemComponent.class).forEach(c -> {

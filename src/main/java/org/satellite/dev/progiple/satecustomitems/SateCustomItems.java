@@ -19,14 +19,14 @@ public final class SateCustomItems extends LunaPlugin {
         INSTANCE = this;
         super.onEnable();
 
-        Bukkit.getScheduler().runTask(INSTANCE, ComponentStorage::loadComponents);
+        ComponentStorage.loadComponents();
         this.registerListeners(
                 new InteractHandler(),
                 new LeaveJoinHandler(),
                 new BlockPlaceHandler(),
                 new LockedManager.Handler());
 
-        LunaExecutor.initialize(INSTANCE);
+        LunaExecutor.initialize(INSTANCE, "#.commands");
     }
 
     @Override

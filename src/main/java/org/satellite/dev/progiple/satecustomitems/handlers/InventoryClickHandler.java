@@ -12,7 +12,7 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.Inventor
 import java.util.UUID;
 
 public class InventoryClickHandler implements Listener {
-    private final CooldownPrevent<UUID> cashes = new CooldownPrevent<>(150);
+    private final CooldownPrevent<UUID> cashes = new CooldownPrevent<>(100);
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {

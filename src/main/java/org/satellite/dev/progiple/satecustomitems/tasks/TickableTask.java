@@ -9,6 +9,9 @@ import org.novasparkle.lunaspring.API.util.utilities.LunaTask;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter
@@ -28,8 +31,8 @@ public class TickableTask extends LunaTask {
 
             PlayerInventory inventory = this.player.getInventory();
             ComponentStorage.getRealizedComponents(TimedItemComponent.class).forEach(c -> {
-                Stream<ItemStack> stream = ComponentStorage.scanInventory(inventory, c);
-                if (stream.count() > 0) c.tick(this.player, stream);
+                List<ItemStack> list = ComponentStorage.scanInventory(inventory, c).toList();
+                if (!list.isEmpty()) c.tick(this.player, list.stream());
             });
         }
     }

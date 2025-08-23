@@ -21,3 +21,7 @@ permissions:
     default: op
   satecustomitems.observer.hide:
     default: false
+  satecustomitems.bypass.cooldown.*:
+    default: false
+  satecustomitems.bypass.cooldown.<id>:
+    default: false

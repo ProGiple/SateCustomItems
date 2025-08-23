@@ -42,12 +42,14 @@ items:
     radius: 15
     time: 30
 messages:
+  inCooldown: "[seconds]"
   reload: ""
   noPlayersNear: ""
   observerScan: ""
   moneyGen: "+[money]"
   experienceGen: "+[exp]"
   obviousCrystalUse: ""
+  obviousCrystalUseFrom: "[player]"
   impulseUse: ""
   blindingWaveUse: ""
   blindingWaveUseFrom: "[player]"

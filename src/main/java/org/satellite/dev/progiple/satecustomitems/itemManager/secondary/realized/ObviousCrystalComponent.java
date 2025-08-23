@@ -3,6 +3,7 @@ package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realize
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
@@ -12,7 +13,8 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemC
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
 
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RealizedComponent
 public class ObviousCrystalComponent extends AbsItemComponent implements ClickableItemComponent {
@@ -23,20 +25,22 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
     }
 
     @Override
-    public boolean onClick(PlayerInteractEvent event) {
+    public boolean onClick(PlayerInteractEvent event, ItemStack itemStack) {
         if (!event.getAction().name().contains("RIGHT")) return false;
-        Player player = event.getPlayer();
 
-        Stream<InvisibilityPlayer> nearby = player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)
+        Player player = event.getPlayer();
+        if (this.inCooldown(player, itemStack.getType())) return true;
+
+        Set<InvisibilityPlayer> nearby = player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)
                 .stream()
                 .filter(p -> p.hasPotionEffect(PotionEffectType.INVISIBILITY))
-                .map(p -> {
-                    InvisibilityPlayer invisibilityPlayer = new InvisibilityPlayer(p);
-                    invisibilityPlayer.recognize();
-                    return invisibilityPlayer;
-                });
+                .map(InvisibilityPlayer::new)
+                .collect(Collectors.toSet());
 
         Config.sendMessage(player, "obviousCrystalUse");
+        nearby.forEach(p -> p.recognize(player));
+
+        this.putCooldown(player, itemStack.getType());
         Bukkit.getScheduler().runTaskLater(SateCustomItems.getINSTANCE(), () -> nearby.forEach(InvisibilityPlayer::back), 20L * this.time);
         return true;
     }
@@ -49,8 +53,9 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
             this.seconds = Objects.requireNonNull(player.getPotionEffect(PotionEffectType.INVISIBILITY)).getDuration() / 20;
         }
 
-        public void recognize() {
+        public void recognize(Player user) {
             this.bukkitPlayer.removePotionEffect(PotionEffectType.INVISIBILITY);
+            Config.sendMessage(this.bukkitPlayer, "obviousCrystalUseFrom", "player-%-" + user.getName());
         }
 
         public void back() {

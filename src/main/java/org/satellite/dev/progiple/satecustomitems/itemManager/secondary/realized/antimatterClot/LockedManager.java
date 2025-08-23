@@ -27,7 +27,7 @@ public class LockedManager {
     }
 
     public boolean contains(UUID uuid) {
-        AntiMatterClotComponent component = ComponentStorage.getComponent(AntiMatterClotComponent.class);
+        AntiMatterClotComponent component = ComponentStorage.getComponents(AntiMatterClotComponent.class).findFirst().orElse(null);
         int timeMillis = component == null ? 20000 : component.getTime() * 1000;
 
         return lockedPlayers.containsKey(uuid) &&
