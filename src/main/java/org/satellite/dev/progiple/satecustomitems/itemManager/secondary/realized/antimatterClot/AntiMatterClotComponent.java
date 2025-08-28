@@ -36,6 +36,8 @@ public class AntiMatterClotComponent extends AbsItemComponent implements Clickab
                 });
 
         this.putCooldown(player, itemStack.getType());
+        itemStack.setAmount(itemStack.getAmount() - 1);
+
         Config.sendMessage(player, "antimatterClotUse");
         return true;
     }

@@ -41,6 +41,8 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
         nearby.forEach(p -> p.recognize(player));
 
         this.putCooldown(player, itemStack.getType());
+        itemStack.setAmount(itemStack.getAmount() - 1);
+
         Bukkit.getScheduler().runTaskLater(SateCustomItems.getINSTANCE(), () -> nearby.forEach(InvisibilityPlayer::back), 20L * this.time);
         return true;
     }

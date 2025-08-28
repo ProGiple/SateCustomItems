@@ -38,6 +38,8 @@ public class BlindingWaveComponent extends AbsItemComponent implements Clickable
                 });
 
         this.putCooldown(player, itemStack.getType());
+        itemStack.setAmount(itemStack.getAmount() - 1);
+
         Config.sendMessage(player, "blindingWaveUse");
         return true;
     }

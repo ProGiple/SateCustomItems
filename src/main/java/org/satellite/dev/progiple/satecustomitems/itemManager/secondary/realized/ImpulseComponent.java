@@ -35,8 +35,10 @@ public class ImpulseComponent extends AbsItemComponent implements ClickableItemC
         direction.setY(this.verticalPower);
         Vector boost = direction.multiply(this.horizontalPower);
 
-        player.setVelocity(player.getVelocity().add(boost));
         this.putCooldown(player, itemStack.getType());
+        itemStack.setAmount(itemStack.getAmount() - 1);
+
+        player.setVelocity(player.getVelocity().add(boost));
         Config.sendMessage(player, "impulseUse");
         return true;
     }
