@@ -44,7 +44,8 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
         this.putCooldown(player, itemStack.getType());
         itemStack.setAmount(itemStack.getAmount() - 1);
 
-        if (SateCustomItems.getINSTANCE().pluginIsEnabled()) new Runnable(() -> nearby.forEach(InvisibilityPlayer::back));
+        if (SateCustomItems.getINSTANCE().pluginIsEnabled()) new Runnable(() -> nearby.forEach(InvisibilityPlayer::back))
+                .runTaskLaterAsynchronously(SateCustomItems.getINSTANCE(), 20L * this.time);
         return true;
     }
 
