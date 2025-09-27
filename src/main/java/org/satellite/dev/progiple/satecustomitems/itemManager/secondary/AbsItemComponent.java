@@ -3,10 +3,14 @@ package org.satellite.dev.progiple.satecustomitems.itemManager.secondary;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
+import org.novasparkle.lunaspring.API.configuration.IgnoredField;
 import org.novasparkle.lunaspring.API.events.CooldownPrevent;
+import org.novasparkle.lunaspring.API.menus.items.Item;
 import org.novasparkle.lunaspring.API.menus.items.NonMenuItem;
 import org.novasparkle.lunaspring.API.util.service.managers.NBTManager;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
@@ -14,15 +18,17 @@ import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
-public abstract class AbsItemComponent implements ItemComponent {
-    public static final UUID HEAD_UUID = UUID.fromString("b7bfad8d-6790-453a-bf3c-e1d78eca0ee5");
+public abstract class AbsItemComponent implements ItemComponent, BlockPlaceItemComponent {
     private static final String PERM_TEMPLATE = "satecustomitems.bypass.cooldown.";
 
     @IgnoredField private final String id;
     @IgnoredField public ConfigurationSection itemSection;
+    @IgnoredField public List<String> blacklistedWorlds;
     public int cooldown;
     public AbsItemComponent(String id) {
         this.id = id;
@@ -50,8 +56,9 @@ public abstract class AbsItemComponent implements ItemComponent {
     @SneakyThrows
     public void reloadSection() {
         this.itemSection = Config.getSection("items." + this.id);
-
         if (this.itemSection == null) return;
+
+        this.blacklistedWorlds = new ArrayList<>(this.itemSection.getStringList("blacklist_worlds"));
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(IgnoredField.class)) continue;
@@ -72,11 +79,16 @@ public abstract class AbsItemComponent implements ItemComponent {
     }
 
     @Override
+    public boolean onPlace(BlockPlaceEvent e, ItemStack itemStack) {
+        return true;
+    }
+
+    @Override
     public NonMenuItem createItem() {
         NonMenuItem item = new NonMenuItem(this.itemSection);
 
         ItemStack stack = item.getItemStack();
-        if (item.getHeadValue() != null) NBTManager.base64head(stack, item.getHeadValue(), HEAD_UUID);
+        if (item.getHeadValue() != null) NBTManager.base64head(stack, item.getHeadValue());
 
         NBTManager.setBool(stack, "sci_" + this.id, true);
         return item;

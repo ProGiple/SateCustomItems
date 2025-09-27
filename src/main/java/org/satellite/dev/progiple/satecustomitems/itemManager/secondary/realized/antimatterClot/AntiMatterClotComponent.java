@@ -21,7 +21,9 @@ public class AntiMatterClotComponent extends AbsItemComponent implements Clickab
     @Override
     public boolean onClick(PlayerInteractEvent e, ItemStack itemStack) {
         if (!e.getAction().name().contains("RIGHT")) return false;
+
         Player player = e.getPlayer();
+        if (this.blacklistedWorlds.contains(player.getWorld().getName())) return true;
 
         if (this.inCooldown(player, itemStack.getType())) return true;
         player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)

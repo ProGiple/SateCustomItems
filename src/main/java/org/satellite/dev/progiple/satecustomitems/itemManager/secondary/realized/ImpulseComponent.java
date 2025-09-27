@@ -26,6 +26,7 @@ public class ImpulseComponent extends AbsItemComponent implements ClickableItemC
         if (!event.getAction().name().contains("RIGHT")) return false;
 
         Player player = event.getPlayer();
+        if (this.blacklistedWorlds.contains(player.getWorld().getName())) return true;
         if (this.inCooldown(player, itemStack.getType())) return true;
 
         player.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 10, 0.5, 0.5, 0.5, 0.5);

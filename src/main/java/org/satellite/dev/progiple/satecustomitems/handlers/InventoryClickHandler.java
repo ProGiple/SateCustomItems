@@ -22,9 +22,12 @@ public class InventoryClickHandler implements Listener {
         if (item == null || item.getType().isAir()) return;
 
         InventoryClickItemComponent component = ComponentStorage.getComponent(item, InventoryClickItemComponent.class);
-        if (component == null || this.cashes.isCancelled(e, player.getUniqueId())) return;
+        if (component == null) return;
 
-        e.setCancelled(true);
+        if (this.cashes.isCancelled(e, player.getUniqueId())) {
+            e.setCancelled(true);
+            return;
+        }
         component.onClick(e);
     }
 }

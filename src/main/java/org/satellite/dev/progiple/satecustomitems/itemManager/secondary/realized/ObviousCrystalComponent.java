@@ -29,6 +29,7 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
         if (!event.getAction().name().contains("RIGHT")) return false;
 
         Player player = event.getPlayer();
+        if (this.blacklistedWorlds.contains(player.getWorld().getName())) return true;
         if (this.inCooldown(player, itemStack.getType())) return true;
 
         Set<InvisibilityPlayer> nearby = player.getWorld().getNearbyPlayers(player.getLocation(), this.radius)

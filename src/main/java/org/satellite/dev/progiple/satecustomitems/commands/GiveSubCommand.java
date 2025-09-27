@@ -3,8 +3,7 @@ package org.satellite.dev.progiple.satecustomitems.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.novasparkle.lunaspring.API.commands.LunaCompleter;
-import org.novasparkle.lunaspring.API.commands.annotations.Check;
+import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.API.commands.annotations.Permissions;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 
 @SubCommand(appliedCommand = "satecustomitems", commandIdentifiers = "give")
 @Permissions("#.give")
-public class GiveSubCommand implements LunaCompleter {
+public class GiveSubCommand implements LunaExecutor {
     // /sci give player id amount
 
     @Override

@@ -5,11 +5,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.novasparkle.lunaspring.API.configuration.IgnoredField;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.IgnoredField;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
 
 import java.util.stream.Stream;
@@ -25,6 +25,8 @@ public class ExpGeneratorComponent extends AbsItemComponent implements TimedItem
 
     @Override
     public void tick(Player handler, Stream<ItemStack> stream) {
+        if (this.blacklistedWorlds.contains(handler.getWorld().getName())) return;
+
         int amount = stream.mapToInt(ItemStack::getAmount).sum() * this.gived_exp_per_item;
         Config.sendMessage(handler, "experienceGen", "exp-%-" + amount);
         Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount));
