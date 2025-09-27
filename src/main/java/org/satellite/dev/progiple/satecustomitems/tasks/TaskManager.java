@@ -10,14 +10,23 @@ import java.util.Optional;
 
 @UtilityClass
 public class TaskManager {
+    private final List<Integer> tasksId = new ArrayList<>();
     private final List<TickableTask> tasks = new ArrayList<>();
 
     public void register(TickableTask tickableTask) {
         tasks.add(tickableTask);
     }
 
+    public void register(int id) {
+        tasksId.add(id);
+    }
+
     public void unregister(TickableTask tickableTask) {
         tasks.remove(tickableTask);
+    }
+
+    public void unregister(int id) {
+        tasksId.remove(id);
     }
 
     public boolean check(TickableTask tickableTask) {
@@ -25,6 +34,9 @@ public class TaskManager {
     }
 
     public void stopAll() {
+        tasksId.forEach(Utils::cancelTask);
+        tasksId.clear();
+
         tasks.forEach(TickableTask::cancel);
         tasks.clear();
     }

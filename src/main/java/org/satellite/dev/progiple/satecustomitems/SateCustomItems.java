@@ -1,6 +1,7 @@
 package org.satellite.dev.progiple.satecustomitems;
 
 import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.bukkit.Bukkit;
 import org.novasparkle.lunaspring.API.commands.CommandInitializer;
 import org.novasparkle.lunaspring.API.commands.LunaExecutor;
@@ -13,8 +14,10 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized.antimatterClot.LockedManager;
 import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 
+@Getter
 public final class SateCustomItems extends LunaPlugin {
     @Getter private static SateCustomItems INSTANCE;
+    @Accessors(fluent = true) private boolean isEnabled = true;
 
     @Override
     public void onEnable() {
@@ -34,6 +37,7 @@ public final class SateCustomItems extends LunaPlugin {
 
     @Override
     public void onDisable() {
+        this.isEnabled = false;
         TaskManager.stopAll();
         super.onDisable();
     }

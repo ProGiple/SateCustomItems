@@ -1,6 +1,5 @@
 package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized;
 
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

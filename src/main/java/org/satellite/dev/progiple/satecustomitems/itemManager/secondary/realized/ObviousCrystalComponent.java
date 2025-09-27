@@ -11,6 +11,8 @@ import org.satellite.dev.progiple.satecustomitems.configs.Config;
 import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
+import org.satellite.dev.progiple.satecustomitems.tasks.Runnable;
+import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 
 import java.util.Objects;
 import java.util.Set;
@@ -44,7 +46,7 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
         this.putCooldown(player, itemStack.getType());
         itemStack.setAmount(itemStack.getAmount() - 1);
 
-        Bukkit.getScheduler().runTaskLater(SateCustomItems.getINSTANCE(), () -> nearby.forEach(InvisibilityPlayer::back), 20L * this.time);
+        if (SateCustomItems.getINSTANCE().isEnabled()) new Runnable(() -> nearby.forEach(InvisibilityPlayer::back));
         return true;
     }
 
