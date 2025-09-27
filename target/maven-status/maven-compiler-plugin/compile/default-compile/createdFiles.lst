@@ -1,4 +1,5 @@
 org\satellite\dev\progiple\satecustomitems\itemManager\Component.class
+org\satellite\dev\progiple\satecustomitems\tasks\Runnable.class
 org\satellite\dev\progiple\satecustomitems\itemManager\secondary\TimedItemComponent.class
 org\satellite\dev\progiple\satecustomitems\itemManager\SlotFilteringComponent.class
 org\satellite\dev\progiple\satecustomitems\itemManager\secondary\realized\ObviousCrystalComponent$InvisibilityPlayer.class

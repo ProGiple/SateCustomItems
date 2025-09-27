@@ -29,7 +29,7 @@ public class ExpGeneratorComponent extends AbsItemComponent implements TimedItem
 
         int amount = stream.mapToInt(ItemStack::getAmount).sum() * this.gived_exp_per_item;
         Config.sendMessage(handler, "experienceGen", "exp-%-" + amount);
-        if (SateCustomItems.getINSTANCE().isEnabled())
+        if (SateCustomItems.getINSTANCE().pluginIsEnabled())
             Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount));
     }
 }

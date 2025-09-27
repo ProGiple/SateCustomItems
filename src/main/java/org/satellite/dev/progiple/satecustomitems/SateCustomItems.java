@@ -2,9 +2,7 @@ package org.satellite.dev.progiple.satecustomitems;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
-import org.bukkit.Bukkit;
 import org.novasparkle.lunaspring.API.commands.CommandInitializer;
-import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.LunaPlugin;
 import org.satellite.dev.progiple.satecustomitems.handlers.BlockPlaceHandler;
 import org.satellite.dev.progiple.satecustomitems.handlers.InteractHandler;
@@ -17,7 +15,7 @@ import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 @Getter
 public final class SateCustomItems extends LunaPlugin {
     @Getter private static SateCustomItems INSTANCE;
-    @Accessors(fluent = true) private boolean isEnabled = true;
+    @Accessors(fluent = true) private boolean pluginIsEnabled = true;
 
     @Override
     public void onEnable() {
@@ -37,7 +35,7 @@ public final class SateCustomItems extends LunaPlugin {
 
     @Override
     public void onDisable() {
-        this.isEnabled = false;
+        this.pluginIsEnabled = false;
         TaskManager.stopAll();
         super.onDisable();
     }

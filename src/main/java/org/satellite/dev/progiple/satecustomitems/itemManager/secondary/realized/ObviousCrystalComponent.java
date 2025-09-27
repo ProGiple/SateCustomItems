@@ -1,6 +1,5 @@
 package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -12,7 +11,6 @@ import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
 import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
 import org.satellite.dev.progiple.satecustomitems.tasks.Runnable;
-import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
 
 import java.util.Objects;
 import java.util.Set;
@@ -46,7 +44,7 @@ public class ObviousCrystalComponent extends AbsItemComponent implements Clickab
         this.putCooldown(player, itemStack.getType());
         itemStack.setAmount(itemStack.getAmount() - 1);
 
-        if (SateCustomItems.getINSTANCE().isEnabled()) new Runnable(() -> nearby.forEach(InvisibilityPlayer::back));
+        if (SateCustomItems.getINSTANCE().pluginIsEnabled()) new Runnable(() -> nearby.forEach(InvisibilityPlayer::back));
         return true;
     }
 
