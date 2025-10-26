@@ -1,4 +1,4 @@
-package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized;
+package org.satellite.dev.progiple.satecustomitems.items.realized;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -6,15 +6,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.novasparkle.lunaspring.API.configuration.IgnoredField;
+import org.novasparkle.lunaspring.API.items.RealizedComponent;
+import org.novasparkle.lunaspring.API.items.secondary.TimedItemComponent;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.TimedItemComponent;
+import org.satellite.dev.progiple.satecustomitems.items.AbsItemComponent;
 
 import java.util.stream.Stream;
 
-@RealizedComponent @Getter
+@RealizedComponent
+@Getter
 public class ExpGeneratorComponent extends AbsItemComponent implements TimedItemComponent {
     @IgnoredField
     private final EquipmentSlot[] enabledSlots = {EquipmentSlot.OFF_HAND, EquipmentSlot.HAND};
@@ -25,10 +26,10 @@ public class ExpGeneratorComponent extends AbsItemComponent implements TimedItem
 
     @Override
     public void tick(Player handler, Stream<ItemStack> stream) {
-        if (this.blacklistedWorlds.contains(handler.getWorld().getName())) return;
+        if (this.blacklistedWorlds.contains(handler.getWorld())) return;
 
         int amount = stream.mapToInt(ItemStack::getAmount).sum() * this.gived_exp_per_item;
-        Config.sendMessage(handler, "experienceGen", "exp-%-" + amount);
+        Config.sendMessage(handler, "generators.experience", "exp-%-" + amount);
         if (SateCustomItems.getINSTANCE().pluginIsEnabled())
             Bukkit.getScheduler().runTask(SateCustomItems.getINSTANCE(), () -> handler.giveExp(amount));
     }

@@ -6,11 +6,12 @@ import org.bukkit.entity.Player;
 import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.API.commands.annotations.Permissions;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
+import org.novasparkle.lunaspring.API.items.ComponentStorage;
+import org.novasparkle.lunaspring.API.items.ItemComponent;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
+import org.satellite.dev.progiple.satecustomitems.items.AbsItemComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ public class GiveSubCommand implements LunaExecutor {
         return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) :
                 list.size() == 2 ? Utils.tabCompleterFiltering(ComponentStorage.getRealizedComponents()
                         .stream()
+                        .filter(c -> c instanceof AbsItemComponent)
                         .map(ItemComponent::getId)
                         .collect(Collectors.toSet()), list.get(1)) :
                         list.size() == 3 ? List.of("<количество>"): null;

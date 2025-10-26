@@ -1,59 +1,200 @@
 items:
   exp_generator:
     material: PLAYER_HEAD
-    displayName: ""
-    lore: []
-    gived_exp_per_item: 4
+    baseHead: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTBlYjU5ZTk2MmQ3NGFhMDNhODMyOGMxNTE5NGI1ZWVkZjM4ZjlkMWQzZjE0NGY0MGZhMDU5NWEyN2E3YTcxNSJ9fX0="
+    displayName: "&x&8&B&4&5&F&FГенератор опыта"
+    lore:
+      - " "
+      - "&x&7&F&3&F&F&0{SPR} Генерирует по &x&7&F&3&F&F&02 ед. опыта"
+      - " "
+      - "&x&7&F&3&F&F&0{SPR} Чем больше &x&7&F&3&F&F&0генераторов&f в руках - тем"
+      - "&x&7&F&3&F&F&0{SPR} Больше генерация &x&7&F&3&F&F&0опыта&f в секунду"
+      - " "
+    gived_exp_per_item: 2
+    blacklist_worlds:
+      - spawn
   money_generator:
     material: PLAYER_HEAD
-    displayName: ""
-    lore: [ ]
-    gived_money_per_item: 1
+    baseHead: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmY3MWFmZDg3ZjdkMmVkZGQyNmY0MzUxYjkxNTYzNTY3NDM0MThjMzRkMTM0OGM5YjNjNWFmYjk5YzZiODMzOSJ9fX0="
+    displayName: "&x&F&F&E&3&4&5Генератор монеток"
+    lore:
+      - " "
+      - "&x&F&F&D&E&4&7{SPR} Генерирует по &x&F&F&D&E&4&70.5 %satecore_eco_symbol%"
+      - " "
+      - "&x&F&F&D&E&4&7{SPR} Чем больше &x&F&F&D&E&4&7генераторов&f в руках - тем"
+      - "&x&F&F&D&E&4&7{SPR} Больше генерация &x&F&F&D&E&4&7монеток&f в секунду"
+      - " "
+    gived_money_per_item: 0.5
+    blacklist_worlds:
+      - spawn
   observer:
     material: COMPASS
-    displayName: ""
-    lore: [ ]
+    enchanted: true
+    displayName: "&x&B&1&F&F&4&5О&x&B&9&F&F&4&6б&x&C&2&F&E&4&6с&x&C&A&F&E&4&7е&x&D&3&F&E&4&7р&x&D&B&F&E&4&8в&x&E&4&F&D&4&8е&x&E&C&F&D&4&9р"
+    lore:
+      - " "
+      - "&x&C&2&F&E&4&6{SPR} Своеобразный локатор &x&C&2&F&E&4&6игроков."
+      - " "
+      - "&x&C&2&F&E&4&6{SPR} Меняет стрелку компаса на последнюю"
+      - "&x&C&2&F&E&4&6{SPR} Локацию &x&C&2&F&E&4&6ближайшего&f игрока рядом"
+      - " "
+      - "&x&C&2&F&E&4&6{SPR} Радиус поиска: &x&C&2&F&E&4&6150 блоков"
+      - "&x&C&2&F&E&4&6{SPR} Перезарядка: &x&C&2&F&E&4&625 секунд"
+      - " "
     radius: 150
     hide_invisibilities: true
-    cooldown: 30
+    cooldown: 25
+    blacklist_worlds:
+      - spawn
   impulse:
     material: SNOWBALL
-    displayName: ""
-    lore: [ ]
+    enchanted: true
+    displayName: "&x&4&5&C&3&F&FИ&x&5&1&C&4&F&Fм&x&5&E&C&5&F&Fп&x&6&A&C&6&F&Fу&x&7&6&C&6&F&Fл&x&8&3&C&7&F&Fь&x&8&F&C&8&F&Fс"
+    lore:
+      - " "
+      - "&x&5&1&C&4&F&F{SPR} Подбрасывает при использовании"
+      - "&x&5&1&C&4&F&F{SPR} На &x&5&1&C&4&F&Fнебольшое расстояние."
+      - "&x&5&1&C&4&F&F{SPR} Также отталкивает немного &x&5&1&C&4&F&Fвперёд"
+      - " "
+      - "&x&5&1&C&4&F&F{SPR} Перезарядка: &x&5&1&C&4&F&F8 секунд"
+      - " "
     verticalPower: 1.0
     horizontalPower: 1.0
+    cooldown: 8
+    blacklist_worlds:
+      - spawn
   obvious_crystal:
-    material: AMETHYST
-    displayName: ""
-    lore: [ ]
+    material: AMETHYST_SHARD
+    enchanted: true
+    displayName: "&x&E&E&8&3&F&FК&x&E&F&8&4&F&Fр&x&E&F&8&5&F&Fи&x&F&0&8&6&F&Fс&x&F&0&8&7&F&Fт&x&F&1&8&8&F&Fа&x&F&1&8&A&F&Fл&x&F&2&8&B&F&Fл &x&F&3&8&D&F&FЯ&x&F&3&8&E&F&Fв&x&F&4&8&F&F&Fи"
+    lore:
+      - " "
+      - "&x&E&F&8&5&F&F{SPR} Снимает со &x&E&F&8&5&F&Fвсех игроков&f рядом"
+      - "&x&E&F&8&5&F&F{SPR} Эффект невидимости на &x&E&F&8&5&F&F20 секунд."
+      - " "
+      - "&x&E&F&8&5&F&F{SPR} Через это время &x&E&F&8&5&F&Fвозвращает&f всем"
+      - "&x&E&F&8&5&F&F{SPR} Игрокам, на которых использовали"
+      - "&x&E&F&8&5&F&F{SPR} &x&E&F&8&5&F&FКристалл,&f эффект невидимости с"
+      - "&x&E&F&8&5&F&F{SPR} Немного &x&E&F&8&5&F&Fуменьшенным временем"
+      - " "
+      - "&x&E&F&8&5&F&F{SPR} Радиус использования: &x&E&F&8&5&F&F15 блоков"
+      - " "
     time: 20
     radius: 15
+    blacklist_worlds:
+      - spawn
   blinding_wave:
     material: BLAZE_POWDER
-    displayName: ""
-    lore: [ ]
-    radius: 15
-    time: 8
-    level: 1
+    displayName: "&x&2&E&8&2&9&8О&x&3&2&8&8&9&Cс&x&3&6&8&E&A&0л&x&3&A&9&4&A&3е&x&3&E&9&A&A&7п&x&4&2&A&0&A&Bл&x&4&6&A&6&A&Fя&x&4&A&A&C&B&2ю&x&4&E&B&2&B&6щ&x&5&2&B&8&B&Aа&x&5&6&B&E&B&Eя &x&5&E&C&A&C&5В&x&6&2&D&0&C&9о&x&6&6&D&6&C&Dл&x&6&A&D&C&D&0н&x&6&E&E&2&D&4а"
+    lore:
+      - " "
+      - "&x&3&6&8&E&A&0{SPR} Выдаёт &x&3&6&8&E&A&0всем игрокам&f рядом"
+      - "&x&3&6&8&E&A&0{SPR} Эффекты слепоты и замедления"
+      - " "
+      - "&x&3&6&8&E&A&0{SPR} Радиус использования: &x&3&6&8&E&A&016 блоков"
+      - "&x&3&6&8&E&A&0{SPR} Уровень эффектов: &x&3&6&8&E&A&0II"
+      - "&x&3&6&8&E&A&0{SPR} Время эффектов: &x&3&6&8&E&A&012 секунд"
+      - " "
+    radius: 16
+    time: 12
+    level: 2
+    blacklist_worlds:
+      - spawn
   antimatter_clot:
-    material: MAGMA_CREAM
-    displayName: ""
-    lore: [ ]
+    material: POPPED_CHORUS_FRUIT
+    displayName: "&x&B&9&4&E&B&5Сгусток Антиматерии"
+    lore:
+      - " "
+      - "&x&A&9&3&4&9&2{SPR} После использования &x&A&9&3&4&9&2запрещает&f всем"
+      - "&x&A&9&3&4&9&2{SPR} &x&A&9&3&4&9&2Игрокам&f рядом использовать &x&A&9&3&4&9&2элитры,"
+      - "&x&A&9&3&4&9&2{SPR} &x&A&9&3&4&9&2Фейерверки и эндер-жемчуг&f в течение"
+      - "&x&A&9&3&4&9&2{SPR} Следующих &x&A&9&3&4&9&230 секунд&f после применения"
+      - " "
+      - "&x&A&9&3&4&9&2{SPR} Радиус использования: &x&A&9&3&4&9&215 блоков"
+      - "&x&A&9&3&4&9&2{SPR} Применяется и на &x&A&9&3&4&9&2применившего"
+      - " "
     radius: 15
     time: 30
+    blacklist_worlds:
+      - spawn
+  dragon_egg:
+    enchanted: true
+    material: DRAGON_EGG
+    displayName: "&x&7&0&8&8&F&1&lЯ&x&7&3&8&B&F&2&lй&x&7&7&8&F&F&3&lц&x&7&A&9&2&F&3&lо &x&8&1&9&8&F&5&lД&x&8&4&9&C&F&6&lр&x&8&8&9&F&F&7&lа&x&8&B&A&2&F&8&lк&x&8&E&A&5&F&8&lо&x&9&2&A&9&F&9&lн&x&9&5&A&C&F&A&lа"
+    lore:
+      - " "
+      - "&x&8&1&9&8&F&5{SPR} &x&8&1&9&8&F&5Яйцо дракона - &fвеликий артефакт,"
+      - "&x&8&1&9&8&F&5{SPR} Способный переработать голову"
+      - "&x&8&1&9&8&F&5{SPR} Дракона в &x&8&1&9&8&F&5звёзды &fна сервере!"
+      - " "
+      - "&x&8&1&9&8&F&5{SPR} Возьмите саму &x&8&1&9&8&F&5голову дракона&f в"
+      - "&x&8&1&9&8&F&5{SPR} Курсор и нажмите на &x&8&1&9&8&F&5ПКМ&f по яйцу"
+      - "&x&8&1&9&8&F&5{SPR} В инвентаре, чтобы &x&8&1&9&8&F&5переработать"
+      - "&x&8&1&9&8&F&5{SPR} Голову в звёзды &7(10-25 штук)"
+      - " "
+      - "&x&8&1&9&8&F&5{SPR} Лимит по головам: &x&8&1&9&8&F&5[now] / [limit] шт."
+      - " "
+    heads_limit: 64
+    give_per_head: 10-25
+    give_after_first_pickup: 75-125
+    give_after_last_head: 100-150
 messages:
-  inCooldown: "[seconds]"
-  reload: ""
-  noPlayersNear: ""
-  observerScan: ""
-  moneyGen: "+[money]"
-  experienceGen: "+[exp]"
-  obviousCrystalUse: ""
-  obviousCrystalUseFrom: "[player]"
-  impulseUse: ""
-  blindingWaveUse: ""
-  blindingWaveUseFrom: "[player]"
-  antimatterClotUse: ""
-  antimatterClotUseFrom: "[player]"
-  pearlsIsDisabled: ""
-  fireworksIsDisabled: ""
+  reload: "{L}{SPR} Вы успешно перезагрузили конфиг!"
+  observer:
+    noPlayersNear:
+      - "{E}{SPR} Игроков рядом не было найдено..."
+      - "[SOUND] ENTITY_WITHER_HURT"
+    observerScan:
+      - "{L}{SPR} Обсервер нашёл игрока рядом и теперь показывает на него!"
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+  generators:
+    money: "[ACTION_BAR] &x&F&F&D&E&4&7+[money] %satecore_eco_symbol%"
+    experience: "[ACTION_BAR] &x&7&F&3&F&F&0+[exp] ⚗"
+  obviousCrystal:
+    use:
+      - "{SP} Вы использовали {S}Кристалл Яви..."
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+    obviousCrystalUseFrom:
+      - "{SP} Игрок {S}[player] &fиспользовал {S}Кристалл Яви&f на вас!"
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+  impulse:
+    use: ""
+  blindingWave:
+    use:
+      - "{SP} Вы использовали {S}Ослепляющую волну..."
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+    useFrom:
+      - "{SP} Игрок {S}[player]&f использовал {S}Ослепляющую Волну &fна вас!"
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+  antimatterClot:
+    use:
+      - "{SP} Вы использовали {S}Сгусток Антиматерии..."
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+    useFrom:
+      - "{SP} Игрок {S}[player]&f использовал {S}Сгусток Антиматерии &fна вас!"
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+    pearlsIsDisabled:
+      - "{E}{SPR} Эндер-жемчуг заблокирован {E}Сгустком Антиматерии!"
+      - "[SOUND] ENTITY_WITHER_HURT"
+    fireworksIsDisabled:
+      - "{E}{SPR} Фейерверк заблокирован {E}Сгустком Антиматерии!"
+      - "[SOUND] ENTITY_WITHER_HURT"
+  dragonEgg:
+    putHead:
+      - "{SP} Головы дракона переработаны в {S}[stars] %satejewels_name_icon%"
+      - "[SOUND] ENTITY_EVOKER_CAST_SPELL"
+    firstPickup:
+      - "[BROADCAST] "
+      - "[BROADCAST] {SP} Игрок {S}%player_displayname%&f первым взял одно из"
+      - "[BROADCAST] {SP} {S}Яиц дракона &fи получил на счёт {S}[stars] %satejewels_name_icon%"
+      - "[BROADCAST] "
+      - "[SOUND_ALL] ENTITY_WITHER_SPAWN"
+    putLastHead:
+      - "[BROADCAST] "
+      - "[BROADCAST] {SP} Игрок {S}%player_displayname% &fполностью заполнил"
+      - "[BROADCAST] {SP} {S}Яйцо дракона&f и получил {S}[stars] %satejewels_name_icon%"
+      - "[BROADCAST] "
+      - "[SOUND_ALL] ENTITY_WITHER_SPAWN"
+    limit:
+      - "{E}{SPR} В данное яйцо дракона {E}невозможно&f загрузить больше голов!"
+      - "[SOUND] ENTITY_WITHER_HURT"

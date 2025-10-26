@@ -5,6 +5,7 @@ api-version: '1.16'
 authors: [ProGiple]
 depend:
   - LunaSpring
+  - SateJewels
 commands:
   satecustomitems:
     aliases:

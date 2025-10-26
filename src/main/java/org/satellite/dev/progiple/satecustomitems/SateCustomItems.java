@@ -2,15 +2,17 @@ package org.satellite.dev.progiple.satecustomitems;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.novasparkle.lunaspring.API.commands.CommandInitializer;
+import org.novasparkle.lunaspring.API.events.CooldownPrevent;
+import org.novasparkle.lunaspring.API.items.ComponentStorage;
 import org.novasparkle.lunaspring.LunaPlugin;
-import org.satellite.dev.progiple.satecustomitems.handlers.BlockPlaceHandler;
-import org.satellite.dev.progiple.satecustomitems.handlers.InteractHandler;
-import org.satellite.dev.progiple.satecustomitems.handlers.InventoryClickHandler;
-import org.satellite.dev.progiple.satecustomitems.handlers.LeaveJoinHandler;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized.antimatterClot.LockedManager;
-import org.satellite.dev.progiple.satecustomitems.tasks.TaskManager;
+import org.satellite.dev.progiple.satecustomitems.items.CursoredItemComponent;
+import org.satellite.dev.progiple.satecustomitems.items.realized.antimatterClot.LockedManager;
 
 @Getter
 public final class SateCustomItems extends LunaPlugin {
@@ -22,13 +24,8 @@ public final class SateCustomItems extends LunaPlugin {
         INSTANCE = this;
         super.onEnable();
 
-        ComponentStorage.loadComponents();
-        this.registerListeners(
-                new InventoryClickHandler(),
-                new InteractHandler(),
-                new LeaveJoinHandler(),
-                new BlockPlaceHandler(),
-                new LockedManager.Handler());
+        ComponentStorage.loadComponents(INSTANCE, "#.items.realized");
+        this.registerListeners(new LockedManager.Handler(), new Handler());
 
         CommandInitializer.initialize(INSTANCE, "#.commands");
     }
@@ -36,7 +33,21 @@ public final class SateCustomItems extends LunaPlugin {
     @Override
     public void onDisable() {
         this.pluginIsEnabled = false;
-        TaskManager.stopAll();
         super.onDisable();
+    }
+
+    private static class Handler implements Listener {
+        private final CooldownPrevent<HumanEntity> cache = new CooldownPrevent<>(75);
+
+        @EventHandler
+        public void onClick(InventoryClickEvent e) {
+            ItemStack itemStack = e.getCursor();
+            if (itemStack == null || itemStack.getType().isAir()) return;
+
+            CursoredItemComponent itemComponent = ComponentStorage.getComponent(itemStack, CursoredItemComponent.class);
+            if (itemComponent == null || this.cache.isCancelled(e, e.getWhoClicked())) return;
+
+            itemComponent.onClick(e);
+        }
     }
 }

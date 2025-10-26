@@ -1,4 +1,4 @@
-package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized.antimatterClot;
+package org.satellite.dev.progiple.satecustomitems.items.realized.antimatterClot;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.novasparkle.lunaspring.API.items.ComponentStorage;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
 
 import java.util.*;
 
@@ -43,11 +43,11 @@ public class LockedManager {
             ItemStack item = e.getItem();
             if (item != null) {
                 if (item.getType() == Material.ENDER_PEARL) {
-                    Config.sendMessage(player, "pearlsIsDisabled");
+                    Config.sendMessage(player, "antimatterClot.pearlsIsDisabled");
                     e.setCancelled(true);
                 }
                 else if (item.getType() == Material.FIREWORK_ROCKET) {
-                    Config.sendMessage(player, "fireworksIsDisabled");
+                    Config.sendMessage(player, "antimatterClot.fireworksIsDisabled");
                     e.setCancelled(true);
                 }
             }

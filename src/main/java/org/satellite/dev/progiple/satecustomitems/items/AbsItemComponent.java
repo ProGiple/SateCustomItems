@@ -1,7 +1,8 @@
-package org.satellite.dev.progiple.satecustomitems.itemManager.secondary;
+package org.satellite.dev.progiple.satecustomitems.items;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -9,18 +10,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.novasparkle.lunaspring.API.configuration.IgnoredField;
-import org.novasparkle.lunaspring.API.events.CooldownPrevent;
-import org.novasparkle.lunaspring.API.menus.items.Item;
+import org.novasparkle.lunaspring.API.items.ItemComponent;
+import org.novasparkle.lunaspring.API.items.secondary.BlockPlaceItemComponent;
 import org.novasparkle.lunaspring.API.menus.items.NonMenuItem;
 import org.novasparkle.lunaspring.API.util.service.managers.NBTManager;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Objects;
 
 @Getter
 public abstract class AbsItemComponent implements ItemComponent, BlockPlaceItemComponent {
@@ -28,7 +27,7 @@ public abstract class AbsItemComponent implements ItemComponent, BlockPlaceItemC
 
     @IgnoredField private final String id;
     @IgnoredField public ConfigurationSection itemSection;
-    @IgnoredField public List<String> blacklistedWorlds;
+    @IgnoredField public List<World> blacklistedWorlds;
     public int cooldown;
     public AbsItemComponent(String id) {
         this.id = id;
@@ -58,7 +57,11 @@ public abstract class AbsItemComponent implements ItemComponent, BlockPlaceItemC
         this.itemSection = Config.getSection("items." + this.id);
         if (this.itemSection == null) return;
 
-        this.blacklistedWorlds = new ArrayList<>(this.itemSection.getStringList("blacklist_worlds"));
+        this.blacklistedWorlds = this.itemSection.getStringList("blacklist_worlds")
+                .stream()
+                .map(Bukkit::getWorld)
+                .filter(Objects::nonNull)
+                .toList();
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(IgnoredField.class)) continue;
@@ -75,7 +78,7 @@ public abstract class AbsItemComponent implements ItemComponent, BlockPlaceItemC
 
     @Override
     public boolean itemIsComponent(ItemStack itemStack) {
-        return NBTManager.hasTag(itemStack, "sci_" + this.id);
+        return itemStack != null && !itemStack.getType().isAir() && NBTManager.hasTag(itemStack, "sci_" + this.id);
     }
 
     @Override

@@ -4,10 +4,10 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.novasparkle.lunaspring.API.configuration.IConfig;
+import org.novasparkle.lunaspring.API.items.ComponentStorage;
+import org.novasparkle.lunaspring.API.items.ItemComponent;
 import org.satellite.dev.progiple.satecustomitems.SateCustomItems;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ComponentStorage;
-import org.satellite.dev.progiple.satecustomitems.itemManager.ItemComponent;
+import org.satellite.dev.progiple.satecustomitems.items.AbsItemComponent;
 
 @UtilityClass
 public class Config {

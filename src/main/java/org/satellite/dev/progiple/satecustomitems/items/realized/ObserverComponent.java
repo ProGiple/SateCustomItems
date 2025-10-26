@@ -1,4 +1,4 @@
-package org.satellite.dev.progiple.satecustomitems.itemManager.secondary.realized;
+package org.satellite.dev.progiple.satecustomitems.items.realized;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -8,11 +8,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.potion.PotionEffectType;
+import org.novasparkle.lunaspring.API.items.RealizedComponent;
+import org.novasparkle.lunaspring.API.items.secondary.ClickableItemComponent;
 import org.novasparkle.lunaspring.API.menus.items.NonMenuItem;
 import org.satellite.dev.progiple.satecustomitems.configs.Config;
-import org.satellite.dev.progiple.satecustomitems.itemManager.RealizedComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.AbsItemComponent;
-import org.satellite.dev.progiple.satecustomitems.itemManager.secondary.ClickableItemComponent;
+import org.satellite.dev.progiple.satecustomitems.items.AbsItemComponent;
 
 import java.util.Comparator;
 
@@ -43,7 +43,7 @@ public class ObserverComponent extends AbsItemComponent implements ClickableItem
 
         this.putCooldown(player, Material.COMPASS);
         if (nearbyPlayer == null) {
-            Config.sendMessage(player, "noPlayersNear");
+            Config.sendMessage(player, "observer.noPlayersNear");
             return true;
         }
 
@@ -52,7 +52,7 @@ public class ObserverComponent extends AbsItemComponent implements ClickableItem
         compassMeta.setLodestoneTracked(false);
         itemStack.setItemMeta(compassMeta);
 
-        Config.sendMessage(player, "observerScan", "player-%-" + nearbyPlayer.getName());
+        Config.sendMessage(player, "observer.observerScan", "player-%-" + nearbyPlayer.getName());
         return true;
     }
 
